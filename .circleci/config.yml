@@ -28,6 +28,7 @@ jobs:
       - run:
           name: add linux dist
           command: mv address ./dist/linux/
-      - run: git add .
+      - run: git status
+      - run: git add ./dist/linux/address
       - run: git commit -m "update dist"
       - run: git push https://$CIRCLE_USERNAME:$GIT_USER_PASS@github.com/athagi/address.git master
