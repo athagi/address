@@ -24,6 +24,7 @@ jobs:
       #- run: go test -v ./...
       - run: go build
       - run: ./address 049-5600
+      - run: git config --global user.email "circleci@github.com" && git config --global user.name "circle.ci"
       - run:
           name: add linux dist
           command: mv address ./dist/linux/
