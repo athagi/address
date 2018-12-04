@@ -37,6 +37,9 @@ func main() {
 	if err := json.Unmarshal(res, data); err != nil {
 		log.Fatal("JSON Unmarshal error:", err)
 	}
+	if len(data.Results) == 0 {
+		log.Fatal(address_code + " is not exist")
+	}
 	results := data.Results[0]
 	pref := results.Address1
 	city := results.Address2
@@ -47,15 +50,17 @@ func main() {
 
 type Addr struct {
 	Message interface{} `json:"message"`
-	Results []struct {
-		Address1 string `json:"address1"`
-		Address2 string `json:"address2"`
-		Address3 string `json:"address3"`
-		Kana1    string `json:"kana1"`
-		Kana2    string `json:"kana2"`
-		Kana3    string `json:"kana3"`
-		Prefcode string `json:"prefcode"`
-		Zipcode  string `json:"zipcode"`
-	} `json:"results"`
-	Status int `json:"status"`
+	Results []Result    `json:"results"`
+	Status  int         `json:"status"`
+}
+
+type Result struct {
+	Address1 string `json:"address1"`
+	Address2 string `json:"address2"`
+	Address3 string `json:"address3"`
+	Kana1    string `json:"kana1"`
+	Kana2    string `json:"kana2"`
+	Kana3    string `json:"kana3"`
+	Prefcode string `json:"prefcode"`
+	Zipcode  string `json:"zipcode"`
 }
